@@ -1,19 +1,21 @@
 import java.util.HashSet;
 
 class GenerateBoard extends Sudoku{
-//    int[][] boardsol = new int[9][9]; //this board is filled completely with numbers
-//    int[][] board = new int[9][9]; //this board has some unfilled spaces
-
-//    GenerateBoard(){
-//        this.boardsol = genBoard(0,0,this.boardsol, new HashSet<Integer>());
-//    }
     GenerateBoard(float level){
-        this.boardsol = genBoard(0,0,this.boardsol, new HashSet<Integer>());
-        this.board = genPlayingBoard(this.board,level);
+        super();
+        super.boardsol = genBoard(0,0,super.boardsol, new HashSet<Integer>());
+        super.board = genPlayingBoard(super.board,level);
+
+        //deep copy of board to original board
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                originalBoard[i][j] = board[i][j];
+            }
+        }
     }
 
     //generates a filled board which follows the sudoku rules
-    private int[][] genBoard(int r, int c, int[][] board, HashSet<Integer> hash) {
+    protected int[][] genBoard(int r, int c, int[][] board, HashSet<Integer> hash) {
         //base condition
         if(r >= board.length){
             return board;
@@ -53,12 +55,12 @@ class GenerateBoard extends Sudoku{
 
     //generates a board with empty spaces
         //by using probability choose that whether the number should be 0 or not.
-    private int[][] genPlayingBoard(int[][] board, float level) {
+    protected int[][] genPlayingBoard(int[][] board, float level) {
         //deep copy the boardsol to board
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if(Math.random() > level){
-                    board[i][j] = boardsol[i][j];
+                    board[i][j] = super.boardsol[i][j];
                 }
             }
         }

@@ -1,8 +1,9 @@
 //completed
     //generate board
+    //place num
 
 //uncompleted
-    //place num
+
     //remove the number
     //reset the board
     //undo step
@@ -10,6 +11,7 @@
     //pencil feature
     //hint
     //solution
+    //simulation
 public class Simulation {
 
 }

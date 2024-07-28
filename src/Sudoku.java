@@ -1,13 +1,26 @@
 import java.util.Arrays;
+import java.util.HashSet;
 
 
 public class Sudoku{
     int[][] boardsol = new int[9][9]; //this board is filled completely with numbers
     int[][] board = new int[9][9]; //this board has some unfilled spaces
-    Sudoku(){}
+
+    final int[][] originalBoard = new int[9][9];
+
+    Sudoku() {}
 
     //place the number
-
+    public void placeNum(int num, int row, int col) throws Exception{
+        if(board[row][col] == 0 && num > 0 && num <= 9){
+            if(isValid(num, row, col, board)){
+                board[row][col] = num;
+            }
+        }
+        else{
+            throw new Exception("Invalid!!");
+        }
+    }
 
     //temporary function
     public void display(int[][] board){
@@ -18,7 +31,8 @@ public class Sudoku{
 
     //to check if the num is valid for that place according to board in argument
         //static because it does not depend on any object
-    static boolean isValid(int num, int row, int col, int[][] board) {
+        //protected so that subclasses can access
+    protected static boolean isValid(int num, int row, int col, int[][] board) {
         //check for vertical row
         for (int i = 0; i < 9 ; i++) {
             if(num == board[i][col]) return false;
